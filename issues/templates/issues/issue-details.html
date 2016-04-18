@@ -1,0 +1,232 @@
+{% extends "issues/issue-base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}pinax-project-zero{% endblock %}
+
+{% block body_class %}home{% endblock %}
+
+{% block content %}
+{#    <nav class="nav-wrapper" >#}
+{#        <h2 align="center">{{ issue.issue_no }}</h2>#}
+{#    </nav>#}
+
+
+    <div class="row">
+
+    <div class="alert alert-info" id="successMessage" role="alert" style="display: none;">Status for issue is updated</div>
+
+        <div class="col s8 card">
+        <div class="card-content">
+            <div class="row ">
+
+                    <h4 class="colr ng-binding" align="center" style="color: #07a;">{{ issue.issue_no }}</h4>
+
+            </div>
+        <div class="row">
+                <div class="col s12">
+                    <p><strong>Title : </strong>{{ issue.title }}</p>
+                </div>
+        </div>
+            <div class="row">
+
+                <div class="col s6">
+                    <p><strong>Created at : </strong>{{ issue.created }}</p>
+                </div>
+
+                <div class="col s6">
+                    <p><strong>Created by : </strong>{{ issue.issue_owner.username }}</p>
+                </div>
+
+            </div>
+
+        <div class="row">
+                <div class="col s6">
+                    <p><strong>Email : </strong>{{ issue.issue_owner.email }}</p>
+                </div>
+
+                <div class="col s6">
+                    <p><strong>Contact Number : </strong>{{ issue.owner_phone_number }}</p>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+
+            <div class="col s6">
+                    <p><strong>Priority :</strong> {{ issue.issue_priority }}</p>
+                </div>
+
+            <div class="col s6">
+                    <p><strong>Classification :</strong> {{ issue.classification }}</p>
+                </div>
+
+            </div>
+            <div class="row">
+
+            <div class="input-field col s6">
+        {% if group in request.user.groups.all %}
+
+
+{#            {% if user.groups__name == "Tickets" %}#}
+                <p><strong>Assigned To :</strong>
+                        {% if issue.assigned_to_user.username %}{{ issue.assigned_to_user.username }}{% else %}
+                            None {% endif %}</p>
+                {% else %}
+                <select class="assignedto" id="id_assignedto" name="assignedto">
+                            {% for userr in users %}
+                                <option value="{{ userr.id }}" {% if issue.assigned_to_user == userr %} selected {% endif %}>{{ userr.username }}</option>
+                            {% endfor %}
+                        </select>
+                            <label>Assigned To</label>
+
+            {% endif %}
+
+                </div>
+
+
+                <div class="col s6">
+                        <div class="input-field col s12">
+
+
+                            <select class="statusnew" id="id_status" name="status">
+                            {% for stat in statuses %}
+                                <option value="{{ stat }}" {% if issue.status == stat %} selected {% endif %}>{{ stat }}</option>
+                            {% endfor %}
+                        </select>
+                            <label>Status</label>
+                            <input id="issue_iddata" type="hidden" value="{{ issue.id }}">
+
+
+                        </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <strong>Description:</strong>
+
+                    <div style="margin-left: 2%;">{{ issue.description|safe }}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s10">
+                    <strong>Attachment</strong>
+
+                    <img class="materialboxed" width="600" src="/media/{{ issue.snapshot }}" />
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="col s4" style="border-left: groove #000000; margin-top: 2%;">
+            <div class="row">
+                <h5 style="margin-left: 4%;margin-bottom:4%;color: #07a;">Comments</h5>
+
+                <div class=" col s10 ">
+                    <input placeholder="Add comment" type="text" class="validate" id="comment" style="height: 100%;"/>
+                </div>
+                <div class="col s2">
+                    <a class="btn-floating btn-small waves-effect waves-light light-blue tooltipped" data-position="bottom" data-delay="50" data-tooltip="Add comment" value="Comment" id="id_comment"><i class="material-icons">+</i></a><input type="hidden" value="{{ issue.id }}">
+                </div>
+            </div>
+
+            <div class="row" style="margin-left: 2%;">
+                <ul ng-if="showCommentList" ng-repeat="comment in commentList" class="mini-timeline ng-scope">
+                    {% for comment in comments %}
+                        <li class="mini-timeline-lime card">
+                            <div class="timeline-icon"></div>
+                            <div class="timeline-body" style="margin-left: 5%;">
+                                <div class="timeline-content ng-binding">
+                                    <p>{{ comment.comment }}
+                                    <a href="#" class="name ng-binding"> - {% if comment.user.username == user.username %} You {% else %} {{ comment.user.username }}{% endif %}</a></p>
+                                    <!--{"data":"{u'from': u'follow up', u'target': u'Radha saha', u'target_id': 57, u'target_type': u'consultant', u'actor': u'ram', u'to': u'follow up', u'verb': u' has updated status from follow up to follow up of ', u'actor_type': u'user', u'actor_id': 2, u'action_object': u'', u'operation': u'status', u'type': u'update'}","verb":"has updated status from follow up to follow up of","action_object_id":"None","actor_id":"2","action_object":"None","timestamp":"2 weeks, 5 days","target_id":"57","actor":"ram","target":"Radha saha","route":"/timeline/activity","reqParams":null,"restangularized":true,"fromServer":true,"parentResource":null,"restangularCollection":false} 2 weeks, 5 days ago-->
+                                    <span class="time ng-binding" style="margin-left: 5%;">On {{ comment.submit_date }}</span>
+                                </div>
+                            </div>
+                        </li><br/>
+                        </ul>
+                    {% endfor %}
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+
+            $('select').material_select();
+
+            $('#id_status').on('change', function () {
+                var stat = $(this).find('option:selected').val();
+                var obj_id = $('#issue_iddata').val();
+                var data = {
+                    status: stat,
+                    object_id: obj_id
+                };
+
+                $.ajax({
+                    url: "/api/update-issue-status/",
+                    type: "POST",
+                    data: data,
+                    success: function (response) {
+                                   Materialize.toast('Status updated', 4000);
+                    },
+                    error: function () {
+
+                    }
+                });
+            });
+
+
+            $('#id_assignedto').on('change', function () {
+                var stat = $(this).find('option:selected').val();
+                var obj_id = $('#issue_iddata').val();
+                var data = {
+                    status: stat,
+                    object_id: obj_id
+                };
+
+                $.ajax({
+                    url: "/api/update-assigned-to/",
+                    type: "POST",
+                    data: data,
+                    success: function (response) {
+                                   Materialize.toast('issue assignee changed', 4000);
+                    },
+                    error: function () {
+
+                    }
+                });
+            });
+
+
+
+
+            $('#id_comment').on('click', function () {
+                var comment = $('#comment').val();
+                var obj_id = $(this).next().val();
+                var data = {
+                    comment: comment,
+                    object_id: obj_id
+                };
+
+                $.ajax({
+                    url: "/api/add-comment-data/",
+                    type: "POST",
+                    data: data,
+                    success: function (response) {
+                                Materialize.toast('Comment added successfully', 4000);
+                                    location.reload();
+                    },
+                    error: function () {
+
+                    }
+                });
+            });
+
+
+        });
+    </script>
+
+
+
+{% endblock %}

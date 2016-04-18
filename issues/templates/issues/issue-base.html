@@ -1,0 +1,105 @@
+{% load bootstrap %}
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title>ckiller</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:100,100italic,300,300italic,400,500,700,900,400italic">
+    <!-- Place favicon.png in the root directory -->
+    <link rel="icon" type="image/png" href="favicon.png" />
+{#    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">#}
+{#    <link rel="stylesheet" href="{{ STATIC_URL }}css/datepicker.css">#}
+{#    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.css">#}
+
+     <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+
+
+{#    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.js"></script>#}
+{#    <script type="text/javascript" src="{{ STATIC_URL }}js/npm.js"></script>#}
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.formset.js"></script>
+{#    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap-datepicker.js"></script>#}
+{#    <script type="text/javascript" src="{{ STATIC_URL }}js/bootstrap.min.js"></script>#}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.validate.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+
+    <style>
+        body
+        {
+            font-family: RobotoDraft, Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        p {
+          font-size: 1.1rem;
+          font-weight: 400;
+          letter-spacing: 0.010em;
+          margin: 1.6rem 0;
+        }
+
+        .status-data {
+    border-radius: 6px;
+    color: #fff;
+    display: inline-block;
+    font-size: 85%;
+    min-width: 54px;
+    padding: 1px 10px;
+    text-align: center;
+    -webkit-align-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    margin-top: -0.5%;
+    float: right;
+}
+
+        .margin-right-10 {
+    margin-right: 10px !important;
+}
+        .status-invoice, .status-paid {
+    background-color: #8bc34a;
+}
+
+        .status-timesheet-rejected, .status-invoice-rejected {
+    background-color: #ff5722;
+}
+
+        .status-new {
+    background-color: #00BCD4;
+}
+
+
+    </style>
+
+
+</head>
+<body>
+<div class="container-fluid">
+
+    <nav>
+    <div class="nav-wrapper" style="background-color: #FC91AD!important;">
+      <a href="#" allign="center" class="brand-logo"><img width="250px" src="/media/logo.png"></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        {% if user.is_authenticated %}
+            <li><a><strong>Hello {{ user.username }}</strong></a></li>
+            <li><a href="/api/issue-list/">Issues</a></li>
+          <li><a href="/api/accounts/logout/">Logout</a></li>
+          {% else %}
+            <li><a href="/api/accounts/login/">Login</a></li>
+          {% endif %}
+      </ul>
+    </div>
+  </nav>
+
+{% block content %}
+
+{% endblock %}
+</div>
+</body>
+</html>

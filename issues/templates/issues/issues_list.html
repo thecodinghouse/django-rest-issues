@@ -1,0 +1,39 @@
+
+{% extends "issues/issue-base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}pinax-project-zero{% endblock %}
+
+{% block body_class %}home{% endblock %}
+
+{% block content %}
+        <h4 align="center">Issues List</h4>
+
+    <div class="row">
+        <div class="col s12 m12">
+            {% for issue in issues %}
+               <a href="/api/issue-details/{{ issue.id }}">
+                <div class="card darken-1" style="height: 50px!important;">
+                <div class="card-content">
+                  <span class="card-title" style="line-height: 2px!important;">{{ issue.issue_no }} - {{ issue.title }}</span>
+                    {% if issue.assigned_to_user %}<span class=" ng-binding" style="margin-left:50%;"> Assigned to : {{ issue.assigned_to_user.username }} </span>{% endif %}
+                    <span class="status-data ng-binding status-invoice margin-right-10"> {{ issue.issue_priority }} </span>
+                    <span class="status-data ng-binding status-timesheet-rejected margin-right-10"> {{ issue.classification }} </span>
+                    <span class="status-data ng-binding status-new margin-right-10"> {{ issue.status }} </span>
+                </div>
+              </div>
+            </a>
+        {% endfor %}
+        </div>
+      </div>
+
+
+{#        <ul >#}
+{#             {% for issue in issues %}#}
+{#                 <a href="/api/issue-details/{{ issue.id }}"><li class="card">{{ issue.issue_no }}</li></a>#}
+{#            {% endfor %}#}
+{#        </ul>#}
+{% endblock %}
+
+
