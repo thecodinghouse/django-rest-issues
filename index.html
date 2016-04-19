@@ -30,11 +30,38 @@
 <ol>
 <li>
 <code>pip install django-rest-issues</code>
-Include "issues" to your install apps and run the migrations.</li>
+</li>
+<li>Include "issues" to your install apps and run the migrations.</li>
+<li>Inside settings.py file include following settings
+<code>DOMAIN_URL="www.xyz.com/admin"</code>
+include the domain url till the admin</li>
 </ol>
+
+<p><code>FROM_EMAIL="abc@gmai.com"</code></p>
+
+<p>FROM_EMAIL is email address from which emails will get sent.</p>
+
+<p><code>EMAIL_TO=["xyz@gmail.com","pqr@gmail.com"]</code></p>
+
+<p>EMAIL_TO is list of emails which will get the email alerts after issues created.</p>
 
 <p>2.
 Or you can download zip file and copy pest issues app to your project. Then run the migrations.</p>
+
+<p><strong>For sending mail create post office templates in admin.</strong>
+1. template Name "IssueCreated"
+  Subject "New issue created on your project name"
+  template "post-office-templates/IssueCreated.html"</p>
+
+<ol>
+<li>template Name "IssueAssigned"
+Subject "Issue assigned on your project name"
+template "post-office-templates/IssueAssigned.html"</li>
+</ol>
+
+<p><em>Pest templates html code to HTML content inside admin</em></p>
+
+<p><em><strong>Use the exact same template names mentioned above</strong></em></p>
 
 <h2>
 <a id="apis" class="anchor" href="#apis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API'S</h2>
@@ -82,39 +109,6 @@ Or you can download zip file and copy pest issues app to your project. Then run 
 </ul>
 
 <p><em>result: List of all issues who's classification is issue</em></p>
-
-<h3>
-<a id="issueissues_by_status_and_user" class="anchor" href="#issueissues_by_status_and_user" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>/issue/issues_by_status_and_user/</h3>
-
-<p>Get's the list of issues for current user and provided status.</p>
-
-<ul>
-<li>param: status i.e. status=open</li>
-</ul>
-
-<p><em>result: List of all issues created by current user who's status is open</em></p>
-
-<h3>
-<a id="issueissues_by_priority_and_user" class="anchor" href="#issueissues_by_priority_and_user" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>/issue/issues_by_priority_and_user/</h3>
-
-<p>Get's the list of issues for current user and provided priority.</p>
-
-<ul>
-<li>param: priority i.e. priority=high</li>
-</ul>
-
-<p><em>result: List of all issues created by current user who's priority is high</em></p>
-
-<h3>
-<a id="issueissues_by_classification_and_user" class="anchor" href="#issueissues_by_classification_and_user" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>/issue/issues_by_classification_and_user/</h3>
-
-<p>Get's the list of issues for current user and provided classification.</p>
-
-<ul>
-<li>param: classification i.e. classification=issue</li>
-</ul>
-
-<p><em>result: List of all issues created by current user who's classification is high.</em></p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/tixdo/django-rest-issues">Django-rest-issues</a> is maintained by <a href="https://github.com/tixdo">tixdo</a>.</span>
