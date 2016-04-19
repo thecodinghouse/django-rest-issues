@@ -25,13 +25,19 @@ EMAIL_TO is list of emails which will get the email alerts after issues created.
 Or you can download zip file and copy pest issues app to your project. Then run the migrations.
 
 **For sending mail create post office templates in admin.**
+
 1. template Name "IssueCreated"
-   Subject "New issue created on your project name"
-   template "post-office-templates/IssueCreated.html"
+
+  Subject "New issue created on your project name"
+
+  template "post-office-templates/IssueCreated.html"
+
 
 2. template Name "IssueAssigned"
-   Subject "Issue assigned on your project name"
-   template "post-office-templates/IssueAssigned.html"
+
+  Subject "Issue assigned on your project name"
+
+  template "post-office-templates/IssueAssigned.html"
 
 _Pest templates html code to HTML content inside admin_
 
