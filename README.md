@@ -10,7 +10,7 @@ Include "issues" to your install apps and run the migrations.
 2.
 Or you can download zip file and copy pest issues app to your project. Then run the migrations.
 
-See the [Doc's](http://gauravwagh.github.io/django-rest-tickets/)
+See the [Doc's](http://tixdo.github.io/django-rest-issues/)
 
 ## API'S
 
