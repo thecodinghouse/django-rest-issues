@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Django-rest-tickets by Gauravwagh</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Django-rest-tickets</h1>
+      <h2 class="project-tagline">Django-rest-ticket is ticket or issue raising system for django-rest-framework.</h2>
+      <a href="https://github.com/Gauravwagh/django-rest-tickets" class="btn">View on GitHub</a>
+      <a href="https://github.com/Gauravwagh/django-rest-tickets/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/Gauravwagh/django-rest-tickets/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h2>
+<a id="django-rest-tickets" class="anchor" href="#django-rest-tickets" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>django-rest-tickets</h2>
+
+<p>Django-rest-ticket is ticket or issue raising system for django rest-framework. This package helps you to add the ticketing system to your application. If user has any issues or suggestions he can log that here. We can use this issue tracking in web apps, android or ios apps. While creating issues user needs to be logged in.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<ol>
+<li>
+<code>pip install django-rest-tickets</code>
+Include "issues" to your install apps and run the migrations.</li>
+</ol>
+
+<p>2.
+Or you can download zip file and copy pest issues app to your project. Then run the migrations.</p>
+
+<h2>
+<a id="apis" class="anchor" href="#apis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API'S</h2>
+
+<h3>
+<a id="issueissues_by_user" class="anchor" href="#issueissues_by_user" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>/issue/issues_by_user/</h3>
+
+<p>Get's the list of issues created by the user.</p>
+
+<ul>
+<li>param: None
+&gt; This api gives the list of issues created by current logged in user.</li>
+</ul>
+
+<h3>
+<a id="issueissues_by_status" class="anchor" href="#issueissues_by_status" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>/issue/issues_by_status/</h3>
+
+<p>Get's the list of issues for particular status.</p>
+
+<ul>
+<li>param: status i.e. status=open
+&gt; result: List of all issues who's status is open</li>
+</ul>
+
+<h3>
+<a id="issueissues_by_priority" class="anchor" href="#issueissues_by_priority" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>/issue/issues_by_priority/</h3>
+
+<p>Get's the list of issues for particular priority.</p>
+
+<ul>
+<li>param: priority i.e. status=high
+&gt; result: List of all issues who's priority is high</li>
+</ul>
+
+<h3>
+<a id="issueissues_by_classification" class="anchor" href="#issueissues_by_classification" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>/issue/issues_by_classification/</h3>
+
+<p>Get's the list of issues for particular classification.</p>
+
+<ul>
+<li>param: classification i.e. classification=issue
+&gt; result: List of all issues who's classification is issue</li>
+</ul>
+
+<h3>
+<a id="issueissues_by_status_and_user" class="anchor" href="#issueissues_by_status_and_user" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>/issue/issues_by_status_and_user/</h3>
+
+<p>Get's the list of issues for current user and provided status.</p>
+
+<ul>
+<li>param: status i.e. status=open
+&gt; result: List of all issues created by current user who's status is open</li>
+</ul>
+
+<h3>
+<a id="issueissues_by_priority_and_user" class="anchor" href="#issueissues_by_priority_and_user" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>/issue/issues_by_priority_and_user/</h3>
+
+<p>Get's the list of issues for current user and provided priority.</p>
+
+<ul>
+<li>param: priority i.e. priority=high
+&gt; result: List of all issues created by current user who's priority is high</li>
+</ul>
+
+<h3>
+<a id="issueissues_by_classification_and_user" class="anchor" href="#issueissues_by_classification_and_user" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>/issue/issues_by_classification_and_user/</h3>
+
+<p>Get's the list of issues for current user and provided classification.</p>
+
+<ul>
+<li>param: classification i.e. classification=issue
+&gt; result: List of all issues created by current user who's classification is high.</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/Gauravwagh/django-rest-tickets">Django-rest-tickets</a> is maintained by <a href="https://github.com/Gauravwagh">Gauravwagh</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
