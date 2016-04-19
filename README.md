@@ -4,11 +4,35 @@ Django-rest-issues is issue raising system for django rest-framework. This packa
 ## Installation
 1. 
 `pip install django-rest-issues`
+* Include "issues" to your install apps and run the migrations.
+* Inside settings.py file include following settings
+`DOMAIN_URL="www.xyz.com/admin"`
+include the domain url till the admin
 
-Include "issues" to your install apps and run the migrations.
+`FROM_EMAIL="abc@gmai.com"`
+
+FROM_EMAIL is email address from which emails will get sent.
+
+`EMAIL_TO=["xyz@gmail.com","pqr@gmail.com"]`
+
+EMAIL_TO is list of emails which will get the email alerts after issues created.
 
 2.
 Or you can download zip file and copy pest issues app to your project. Then run the migrations.
+
+**For sending mail create post office templates in admin.**
+1. template Name "IssueCreated"
+   Subject "New issue created on your project name"
+   template "post-office-templates/IssueCreated.html"
+
+2. template Name "IssueAssigned"
+   Subject "Issue assigned on your project name"
+   template "post-office-templates/IssueAssigned.html"
+
+_Pest templates html code to HTML content inside admin_
+
+_**Use the exact same template names mentioned above**_
+
 
 See the [Doc's](http://tixdo.github.io/django-rest-issues/)
 
