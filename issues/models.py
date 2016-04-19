@@ -12,7 +12,7 @@ import uuid
 # Local app imports ----------------
 
 from .utils import send_mail_data
-from settings import DOMAIN_URL
+from django.conf import settings
 
 USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
@@ -115,7 +115,7 @@ class Issues(TimeStampedModel):
             self.issue_no = increment_issue_number()
         if self.pk is not None:
             orig = Issues.objects.get(pk=self.pk)
-            link = "http://" + DOMAIN_URL + "/issues/" + str(self.id)
+            link = "http://" + settings.DOMAIN_URL + "/issues/" + str(self.id)
             if not orig.assigned_to_user and self.assigned_to_user:
                 context = {"type":"Issue_Assigned", "template":"IssueAssigned", "link":link, "issue_no": self.issue_no, "issue_title":self.title, "descrption":self.description, "created_by":self.issue_owner.username, "priority":self.issue_priority, "classification":self.classification, "assigned_to":self.assigned_to_user.username, "email_to":self.assigned_to_user.email, "created_at":self.created}
                 send_mail_data(context)
