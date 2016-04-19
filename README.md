@@ -4,10 +4,13 @@ Django-rest-ticket is ticket or issue raising system for django rest-framework. 
 ## Installation
 1. 
 `pip install django-rest-tickets`
+
 Include "issues" to your install apps and run the migrations.
 
 2.
 Or you can download zip file and copy pest issues app to your project. Then run the migrations.
+
+See the [Doc's](http://gauravwagh.github.io/django-rest-tickets/)
 
 ## API'S
 
