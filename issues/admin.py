@@ -10,7 +10,6 @@ from functools import partial
 
 # Register your models here.
 
-from employee.models import Employee
 from .models import Issues
 
 

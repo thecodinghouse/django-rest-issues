@@ -13,16 +13,19 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import list_route,detail_route
+from rest_framework.pagination import PageNumberPagination
 from django_comments.models import Comment
 
 # local app related imports
-from ckiller import settings
 from .models import Issues, increment_issue_number
 from .serializers import IssuesSerializer
-from utils_app.pagination import StandardIssueResultsSetPagination
-from employee.models import Employee
 from .utils import send_mail_data
 from .decorators import user_in_group_required
+
+class StandardIssueResultsSetPagination(PageNumberPagination):
+    page_size = 5
+    page_size_query_param = 'page_size'
+    max_page_size = 25
 
 # API for issues
 class IssueViewSet(viewsets.ModelViewSet):
