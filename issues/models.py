@@ -1,13 +1,14 @@
 from django.db import models
 from django_extensions.db.models import TitleSlugDescriptionModel
-from core_aap.mixins import BasePeople, TaggedMixin, Ownable, TimeStampedModel, Orderable, get_attachment_file_path
 from django.conf import settings
 from django.db import connection
-
+from django_extensions.db.fields import (
+    AutoSlugField, CreationDateTimeField, ModificationDateTimeField,
+)
+from django.utils.translation import ugettext_lazy as _
 
 # Third party apps import
 from tinymce.models import HTMLField
-from tenant_schemas.utils import get_tenant_model
 
 # Local app imports ----------------
 
@@ -15,6 +16,19 @@ from .utils import send_mail_data
 
 USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
+
+class TimeStampedModel(models.Model):
+    """ TimeStampedModel
+    An abstract base class model that provides self-managed "created" and
+    "modified" fields.
+    """
+    created = CreationDateTimeField(_('created'))
+    modified = ModificationDateTimeField(_('modified'))
+
+    class Meta:
+        get_latest_by = 'modified'
+        ordering = ('-modified', '-created',)
+        abstract = True
 
 
 # Creat unique issue number
