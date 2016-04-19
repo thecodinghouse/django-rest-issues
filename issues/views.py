@@ -1,13 +1,4 @@
-from django.contrib.auth.models import User, Group, Permission
 from django.conf import settings
-from django.db import connection
-from django.shortcuts import render
-from django.contrib.contenttypes.models import ContentType
-from django.views.decorators.csrf import csrf_exempt
-from django.http import HttpResponse
-from django.utils import timezone
-from django.contrib.auth.models import User, Group
-from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Third party imports.
 from rest_framework import viewsets
@@ -20,7 +11,6 @@ from django_comments.models import Comment
 from .models import Issues, increment_issue_number
 from .serializers import IssuesSerializer
 from .utils import send_mail_data
-from .decorators import user_in_group_required
 
 class StandardIssueResultsSetPagination(PageNumberPagination):
     page_size = 5
@@ -48,11 +38,9 @@ class IssueViewSet(viewsets.ModelViewSet):
         issue = Issues.objects.create(title=request.data['title'], issue_owner=request.user, issue_no=increment_issue_number(),
                                       owner_phone_number=request.data['owner_phone_number'], description=request.data['description'],
                                       status=request.data['status'], issue_priority=request.data['issue_priority'], classification=request.data['classification'], owner_role=request.data['owner_role'], snapshot=request.FILES.get('snapshot[0]'))
-        tenant = connection.get_tenant()
-        url = tenant.domain_url
-        link = "http://" + url + "/api/issue-details/" + str(issue.id)
+        link = "http://" + settings.DOMAIN_URL + "/issues/" + str(self.id)
         issues = Issues.objects.filter(issue_owner=self.request.user)
-        context = {"type":"Issue_Assigned", "template":"IssueCreated", "link":link, "issue_no": issue.issue_no, "issue_title":issue.title, "descrption":issue.description, "created_by":issue.issue_owner.username, "priority":issue.issue_priority, "classification":issue.classification, "email_to":['abhinav.sohani@consultadd.in', 'chinmay.deshpande@consultadd.in'], "created_at":issue.created}
+        context = {"type":"Issue_Assigned", "template":"IssueCreated", "link":link, "issue_no": issue.issue_no, "issue_title":issue.title, "descrption":issue.description, "created_by":issue.issue_owner.username, "priority":issue.issue_priority, "classification":issue.classification, "email_to":settings.EMAIL_TO, "created_at":issue.created}
         send_mail_data(context)
         results = IssuesSerializer(issues, many=True)
         return Response(results.data, status="200")
