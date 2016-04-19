@@ -6,7 +6,9 @@ Django-rest-issues is issue raising system for django rest-framework. This packa
 `pip install django-rest-issues`
 * Include "issues" to your install apps and run the migrations.
 * Inside settings.py file include following settings
+
 `DOMAIN_URL="www.xyz.com/admin"`
+
 include the domain url till the admin
 
 `FROM_EMAIL="abc@gmai.com"`
