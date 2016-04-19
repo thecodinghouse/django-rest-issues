@@ -4,6 +4,7 @@ Django-rest-issues is issue raising system for django rest-framework. This packa
 ## Installation
 1. 
 `pip install django-rest-issues`
+
 Include "issues" to your install apps and run the migrations.
 
 2.
