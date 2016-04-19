@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
   name = 'django-rest-issues',
   packages = ['issues'], # this must be the same as the name above
-  version = '0.6',
+  version = '0.7',
   description = 'Django rest issues is issue raising system. Here logged in users can rais the issues.',
   author = 'Gaurav Wagh',
   author_email = 'waghgaurav.g@gmail.com',
