@@ -75,6 +75,23 @@ Or you can download zip file and copy pest issues app to your project. Then run 
 
 <p><em><strong>Use the exact same template names mentioned above</strong></em></p>
 
+<p><strong>Create two groups in django admin groups table</strong></p>
+
+<ol>
+<li>Administrator</li>
+<li>Tickets</li>
+</ol>
+
+<p>for Administrator group give all issues app related permissions EX. can add issue, can change issue etc</p>
+
+<p>for Tickets group give only one issues app related permissions i.e. "can change issue"</p>
+
+<p>Add the users to Administrator group who has the authority to assign issues to other users.</p>
+
+<p>And add users to Tickets group who has the authority to resolve issues. (The users who are actually resolves the issue )</p>
+
+<p>At least one administrator and one tickets group user is required.</p>
+
 <h2>
 <a id="apis" class="anchor" href="#apis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API'S</h2>
 
