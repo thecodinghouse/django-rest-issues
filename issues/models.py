@@ -9,12 +9,27 @@ from django.utils.translation import ugettext_lazy as _
 
 # Third party apps import
 from tinymce.models import HTMLField
+import uuid
 
 # Local app imports ----------------
 
 from .utils import send_mail_data
 
 USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
+
+
+def get_attachment_file_path(instance, filename):
+    """
+    Produces a unique file path for the upload_to of a FileField.
+
+        The produced path is of the form:
+        "[model name]/[field name]/[random name].[filename extension]".
+    """
+
+    new_filename = "%s.%s" % (uuid.uuid4(),
+                              filename.split('.')[-1])
+    return '/'.join([instance.__class__.__name__.lower(),
+                    new_filename])
 
 
 class TimeStampedModel(models.Model):
