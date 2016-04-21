@@ -16,6 +16,41 @@ from django.conf import settings
 USER_MODEL = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
 
+class IssuesManager(models.Manager):
+    def get_queryset(self):
+        qs = super(IssuesManager, self).get_queryset()
+        return qs.order_by('-created')  # order the queryset
+
+    def issue_list_by_status(self, status):
+        issues = Issues.objects.filter(status=status)
+        return issues
+
+    def issue_list_by_priority(self, priority):
+        issues = Issues.objects.filter(priority=priority)
+        return issues
+
+    def issue_list_by_classification(self, classification):
+        issues = Issues.objects.filter(classification=classification)
+        return issues
+
+    def issue_list_by_status_and_owner(self, status, user):
+        issues = Issues.objects.filter(status=status, issue_owner=user)
+        return issues
+
+
+    def issue_list_by_priority_and_owner(self, priority, user):
+        issues = Issues.objects.filter(priority=priority, issue_owner=user)
+        return issues
+
+    def issue_list_by_classification_and_owner(self, classification, user):
+        issues = Issues.objects.filter(classification=classification, issue_owner=user)
+        return issues
+
+    def delete_by_status(self, status):
+        Issues.objects.filter(status=status).delete()
+        return True
+
+
 def get_attachment_file_path(instance, filename):
     """
     Produces a unique file path for the upload_to of a FileField.
@@ -105,6 +140,7 @@ class Issues(TimeStampedModel):
     owner_role = models.CharField(choices=USER_TYPE, max_length=255, null=True, blank=True)
     snapshot = models.FileField(upload_to=get_attachment_file_path, max_length=500, null=True,blank=True, verbose_name="snapshot")
     due_date = models.DateTimeField(null=True, blank=True)
+    objects = IssuesManager()
 
     def __unicode__(self):
         return self.title
