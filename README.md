@@ -25,17 +25,38 @@ EMAIL_TO is list of emails which will get the email alerts after issues created.
 Or you can download zip file and copy pest issues app to your project. Then run the migrations.
 
 **For sending mail create post office templates in admin.**
+
 1. template Name "IssueCreated"
-   Subject "New issue created on your project name"
-   template "post-office-templates/IssueCreated.html"
+
+  Subject "New issue created on your project name"
+
+  template "post-office-templates/IssueCreated.html"
+
 
 2. template Name "IssueAssigned"
-   Subject "Issue assigned on your project name"
-   template "post-office-templates/IssueAssigned.html"
+
+  Subject "Issue assigned on your project name"
+
+  template "post-office-templates/IssueAssigned.html"
 
 _Pest templates html code to HTML content inside admin_
 
 _**Use the exact same template names mentioned above**_
+
+**Create two groups in django admin groups table**
+
+1. Administrator
+2. Tickets
+
+for Administrator group give all issues app related permissions EX. can add issue, can change issue etc
+
+for Tickets group give only one issues app related permissions i.e. "can change issue"
+
+Add the users to Administrator group who has the authority to assign issues to other users.
+
+And add users to Tickets group who has the authority to resolve issues. (The users who are actually resolves the issue )
+
+At least one administrator and one tickets group user is required.
 
 
 See the [Doc's](http://tixdo.github.io/django-rest-issues/)
