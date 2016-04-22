@@ -1,5 +1,4 @@
 # Django related imports
-from django.db import transaction
 from django.contrib.auth.models import User
 
 # Rest framework related imports
